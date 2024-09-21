@@ -9,12 +9,13 @@ import {UpdateuserComponent} from "./updateuser/updateuser.component";
 import {UserlistComponent} from "./userlist/userlist.component";
 
 
-export const routes: Routes = [
+export let routes: Routes;
+routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: 'register', component: RegisterComponent, canActivate: [adminGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [usersGuard]},
-  {path: 'update/:id', component: UpdateuserComponent},
-  {path: 'users', component: UserlistComponent},
+  {path: 'update/:id', component: UpdateuserComponent, canActivate: [adminGuard]},
+  {path: 'users', component: UserlistComponent, canActivate:[adminGuard]},
   {path: '**', component: LoginComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
 ];
